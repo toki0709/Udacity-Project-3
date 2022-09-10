@@ -1,5 +1,0 @@
-**/.terraform/*
-**/.terraform*
-**/*.plan
-.DS_Store
-StarterAPIs
