@@ -6,7 +6,7 @@ stages:
   jobs:
   - job: Build
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'ubuntu-22.04'
     steps:
     # Needed for Terraform VM deployment
     - task: InstallSSHKey@0
@@ -14,10 +14,42 @@ stages:
         knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
         sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKn1GwbWqaBwb+nL3+TfiqrWB1nPtf28O/5nBa+o6UbpIR/uVO1/+ZLPmeZiM4G8cQicyREifvHb//4Bp4KPMXOM/tiekimg46PDZoX+J+4RT4Th5+k3YBMCvR26TVcP7MPdCERPwveN4jE+LptW/cZXwPlELwrKqgTuZIa5rzDikTXBg1HfbPariTZCLJW3qUtgCasNHWbNUsviMPZircoQbf9UG74MkheqNKrNFT/4SIL14ALO6L3+4X2SrEdHzYwvq4ujl4JKlSExyn5fIjXy+hpewMZuO8mlzm8gcfsnpn31XsQyIwaihSaEqGft8PLFF5KidXSEjl4au65JtL toki@cc-c372ade6-57c899bb86-wncc6'
         sshKeySecureFile: 'id_rsa'
+  
+    - task: TerraformTaskV3@3
+      displayName: Terraform Init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        backendServiceArm: 'Azure for Students(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+        backendAzureRmResourceGroupName: 'tfstate'
+        backendAzureRmStorageAccountName: 'tfstate1701416961'
+        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmKey: 'prod.terraform.tfstate'
+    - task: TerraformTaskV3@3
+      displayName: Terraform Validate
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    - task: TerraformTaskV3@3
+      displayName: Terraform Plan
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        environmentServiceNameAzureRM: 'Azure for Students(2)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+    - task: TerraformTaskV3@3
+      displayName: Terraform Apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        environmentServiceNameAzureRM: 'Azure for Students(3)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
-        rootFolderOrFile: 'path/to/fakerestapi'
+        rootFolderOrFile: 'automatedtesting/jmeter/fakerestapi'
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
@@ -28,7 +60,7 @@ stages:
   jobs:
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'ubuntu-22.04'
     environment: 'TEST'
     strategy:
       runOnce:
