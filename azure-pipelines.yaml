@@ -12,7 +12,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'KNOWN_HOSTS_STRING'
-        sshPublicKey: 'PUBLIC_KEY'
+        sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKn1GwbWqaBwb+nL3+TfiqrWB1nPtf28O/5nBa+o6UbpIR/uVO1/+ZLPmeZiM4G8cQicyREifvHb//4Bp4KPMXOM/tiekimg46PDZoX+J+4RT4Th5+k3YBMCvR26TVcP7MPdCERPwveN4jE+LptW/cZXwPlELwrKqgTuZIa5rzDikTXBg1HfbPariTZCLJW3qUtgCasNHWbNUsviMPZircoQbf9UG74MkheqNKrNFT/4SIL14ALO6L3+4X2SrEdHzYwvq4ujl4JKlSExyn5fIjXy+hpewMZuO8mlzm8gcfsnpn31XsQyIwaihSaEqGft8PLFF5KidXSEjl4au65JtL toki@cc-c372ade6-57c899bb86-wncc6'
         sshKeySecureFile: 'id_rsa'
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
