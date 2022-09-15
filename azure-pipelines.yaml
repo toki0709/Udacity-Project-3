@@ -72,7 +72,7 @@ stages:
             inputs:
               azureSubscription: 'Azure for Students(4)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
               appType: 'webApp'
-              appName: 'automate-app-test-azure-project-AppService'
+              appName: 'azure-webapp-project3-udacity-toki-appservice'
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
               deploymentMethod: 'auto'
   
