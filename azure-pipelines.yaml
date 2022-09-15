@@ -57,7 +57,7 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
 
-- stage: Deploy Web App
+- stage:
   jobs:
   - deployment: FakeRestAPI
     pool:
