@@ -57,7 +57,7 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
 
-- stage:
+- stage: Deploy Web App
   jobs:
   - deployment: FakeRestAPI
     pool:
@@ -70,6 +70,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
+              azureSubscription: 'Azure for Students(4)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
               appType: 'webApp'
               appName: 'azure-project3-autotest-toki'
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
