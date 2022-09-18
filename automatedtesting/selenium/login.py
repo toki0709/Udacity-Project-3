@@ -1,6 +1,5 @@
 # #!/usr/bin/env python
 from datetime import datetime
-import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
