@@ -89,6 +89,8 @@ stages:
   
   - deployment: VMDeploy
     displayName: Deploy
+    pool:
+      vmImage: 'ubuntu-22.04'
     environment:
       name:  Test
       resourceType: VirtualMachine
