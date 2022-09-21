@@ -28,6 +28,7 @@ variable "name" {
 variable "admin_username" {
   default = "azureuser"
 }
+variable "public_key" {}
 # variable "public_key_path" {
 #     description = "Full path incl. filename to the public key."
 #     default = "tf.pub"
