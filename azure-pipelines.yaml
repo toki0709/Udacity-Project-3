@@ -12,9 +12,9 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
-        sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKn1GwbWqaBwb+nL3+TfiqrWB1nPtf28O/5nBa+o6UbpIR/uVO1/+ZLPmeZiM4G8cQicyREifvHb//4Bp4KPMXOM/tiekimg46PDZoX+J+4RT4Th5+k3YBMCvR26TVcP7MPdCERPwveN4jE+LptW/cZXwPlELwrKqgTuZIa5rzDikTXBg1HfbPariTZCLJW3qUtgCasNHWbNUsviMPZircoQbf9UG74MkheqNKrNFT/4SIL14ALO6L3+4X2SrEdHzYwvq4ujl4JKlSExyn5fIjXy+hpewMZuO8mlzm8gcfsnpn31XsQyIwaihSaEqGft8PLFF5KidXSEjl4au65JtL toki@cc-c372ade6-57c899bb86-wncc6'
-        sshKeySecureFile: 'id_rsa'
-  
+        sshPublicKey: $(tf_3_pub)
+        sshKeySecureFile: 'tf_3'
+
     - task: TerraformTaskV3@3
       displayName: Terraform Init
       inputs:
