@@ -61,5 +61,4 @@ module "vm" {
   subnet_id      = module.network.subnet_id_test
   public_ip      = module.publicip.public_ip_address_id
   admin_username = var.admin_username
-  public_key     = file("~/.ssh/tf_3.pub")
 }

@@ -13,8 +13,7 @@ resource_type    = "AppService"
 
 #vm 
 name           = "vm-test"
-admin_username = "ch"
-# public_key     = file("~/.ssh/tf_3.pub")
+admin_username = "azureuser"
 
 # Network
 address_space        = ["10.5.0.0/16"]

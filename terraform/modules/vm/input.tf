@@ -4,4 +4,3 @@ variable "location" {}
 variable "name" {}
 variable "subnet_id" {}
 variable "admin_username" {}
-variable "public_key" {}

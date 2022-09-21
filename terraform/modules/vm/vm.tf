@@ -37,12 +37,12 @@ resource "azurerm_network_interface" "test" {
 # }
 
 # Create (and display) an SSH key
-# resource "tls_private_key" "example_ssh" {
-#   algorithm = "RSA"
-#   rsa_bits  = 4096
-# }
+resource "tls_private_key" "example_ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
-  name                  = "myVM"
+  name                  = "myVM-3"
   location              = var.location
   resource_group_name   = var.resource_group
   network_interface_ids = [azurerm_network_interface.test.id]
@@ -67,7 +67,8 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = var.public_key
+    public_key = tls_private_key.example_ssh.public_key_openssh
   }
 
 }
+
