@@ -100,6 +100,7 @@ stages:
       displayName: 'Functional UI Test'
       artifact: drop-Selenium
 
+
 - stage: Deploy
   jobs:
   - deployment: FakeRestAPI
@@ -112,12 +113,11 @@ stages:
           steps:
             - task: AzureWebApp@1
               inputs:
-                azureSubscription: 'Azure for Students(4)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+                azureSubscription: 'Azure for Students(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
                 appType: 'webApp'
                 appName: 'automate-app-test-azure-project-AppService'
                 package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
                 deploymentMethod: 'auto'
-  
   
   # - deployment: VMDeploy
   #   displayName: Deploy
