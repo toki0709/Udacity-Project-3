@@ -15,6 +15,7 @@ stages:
         sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDdBpKgatWFZ48d4cnUhMt8qD45pljqmS1qlPikC2A+u+hlQf+pOtUUdrrtmbKWVXzUFLFYqKM9msiIKtuoZnbQj6wyi8cD9CwyNKuUGuD6kvwQrMmfwIuIrtx1wrRQe6MmEDUGmQio0xSrjOSNmAQhxfIqhqhHyFXE6dL46zjVgJHV5xjFAeMwaS2jbTRk08vBWuwx50kcjF00qDg8w2+UkBcI0nLBJ58nmBSuIUO5VZDwDPqZ5W9De6maRDeBd4j9oNH3mByjzx1E4xeluF5S9I2TniY2aogUTv5SCbVioyLYky9G+DKbwu+6L3n3yX4LC/QYWn51FNttD+wmwJ+mvslUKJyZjS4lvT+ktiaIF4elEwInwjk5L9EkThf8ZaYbSuPuwD31sFvxl6vjrp3AluCgtqs4BCmBPDfUhtE7qX6PmCNzuEBpER3fl7ObxW6VLuYZb6M7MLD32K/qs5lEhRaS2k1r/BltzgxS/RJwJa3unLeI7bbuerlSNPvGYgM= tokitazwar71@gmail.com'
         sshKeySecureFile: 'id_rsa'
     - task: TerraformTaskV3@3
+      displayName: Terraform Init
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -23,20 +24,21 @@ stages:
         backendAzureRmStorageAccountName: 'tfstate1701416961'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'prod.terraform.tfstate'
-    
     - task: TerraformTaskV3@3
+      displayName: Terraform Validate
       inputs:
         provider: 'azurerm'
         command: 'validate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-
     - task: TerraformTaskV3@3
+      displayName: Terraform plan
       inputs:
         provider: 'azurerm'
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
         environmentServiceNameAzureRM: 'Azure for Students(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
     - task: TerraformTaskV3@3
+      displayName: Terraform apply
       inputs:
         provider: 'azurerm'
         command: 'apply'
