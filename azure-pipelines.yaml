@@ -16,36 +16,67 @@ stages:
         sshKeySecureFile: 'id_rsa'
 
     - task: TerraformTaskV3@3
-      displayName: Terraform Init
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        backendServiceArm: 'Azure for Students(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+        backendServiceArm: 'proj-3'
         backendAzureRmResourceGroupName: 'tfstate'
         backendAzureRmStorageAccountName: 'tfstate1701416961'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'prod.terraform.tfstate'
     - task: TerraformTaskV3@3
-      displayName: Terraform Validate
       inputs:
         provider: 'azurerm'
         command: 'validate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     - task: TerraformTaskV3@3
-      displayName: Terraform Plan
       inputs:
         provider: 'azurerm'
         command: 'plan'
+        environmentServiceNameAzureRM: 'proj-3'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        environmentServiceNameAzureRM: 'Azure for Students(2)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
     - task: TerraformTaskV3@3
-      displayName: Terraform Apply
       inputs:
         provider: 'azurerm'
         command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        environmentServiceNameAzureRM: 'Azure for Students(3)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+        environmentServiceNameAzureRM: 'proj-3'
+
+
+    # - task: TerraformTaskV3@3
+    #   displayName: Terraform Init
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'init'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    #     backendServiceArm: 'Azure for Students(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+    #     backendAzureRmResourceGroupName: 'tfstate'
+    #     backendAzureRmStorageAccountName: 'tfstate1701416961'
+    #     backendAzureRmContainerName: 'tfstate'
+    #     backendAzureRmKey: 'prod.terraform.tfstate'
+
+    # - task: TerraformTaskV3@3
+    #   displayName: Terraform Validate
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'validate'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    # - task: TerraformTaskV3@3
+    #   displayName: Terraform Plan
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'plan'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    #     environmentServiceNameAzureRM: 'Azure for Students(2)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+    # - task: TerraformTaskV3@3
+    #   displayName: Terraform Apply
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'apply'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    #     environmentServiceNameAzureRM: 'Azure for Students(3)(7cb082a6-6105-42a2-a09c-90c88cc9a56d)'
+    
+
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
